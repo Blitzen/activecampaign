@@ -46,7 +46,7 @@ class ActiveCampaign():
         If an error occurs, it will raise a requests raise_for_status exception
         '''
         if type(data) == dict:
-            data = json.dumps(data)
+            data = '&'.join([key + '=' + value for key, value in data.items()])
         try:
             request = self._request_method[method]
         except KeyError as e:
@@ -63,8 +63,8 @@ class ActiveCampaign():
         else:
             response.raise_for_status()
 
-    def make_request(self, api_action='list_view', params=None):
-        resp = self.call(api_action=api_action, params=params)
+    def make_request(self, api_action='list_view', method='GET', data=None, params=None):
+        resp = self.call(api_action=api_action, method=method, data=data, params=params)
         return resp
 
     def test_credentials(self):
