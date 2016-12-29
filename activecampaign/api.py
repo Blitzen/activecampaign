@@ -63,8 +63,8 @@ class ActiveCampaign():
         else:
             response.raise_for_status()
 
-    def make_request(self, api_action='list_view', params=None):
-        resp = self.call(api_action=api_action, params=params)
+    def make_request(self, api_action='list_view', method='GET', data=None, params=None):
+        resp = self.call(api_action=api_action, method=method, data=data, params=params)
         return resp
 
     def test_credentials(self):
